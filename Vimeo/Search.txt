@@ -1,0 +1,46 @@
+<?php
+
+$client_id = "690945e7ebd0f084e82fba9c99f4348974785fd1";
+     $client_secret = "m0hULCDKxF5euoqk0zi3DaePVXsNGxUAoars/pC/aeeyyP29meXFeeq1pozgy89uxZx8sIahOp648sh5QR9Npi5UMadIJSP5HL/9zfiy2VJRU8UPd/+BSkHYPCoYVa3X";
+     $token = "15aad045d11abf28dc95057c36c09047";
+     $vimeo_id = "joshhayward";
+     require_once 'C:\Users\basai\vendor\vimeo\vimeo-api\autoload.php';
+     $vimeo = new \Vimeo\Vimeo($client_id, $client_secret, $token);
+	 // PENTRU TAGURI $videos = $vimeo->request('/tags/audi/videos');
+	 // PENTRU COMMENT-URI https://api.vimeo.com/videos/{video_id}/comments
+
+	$input = 'birthday';
+
+	 $videos = $vimeo->request('/videos?query='.$input.'');
+
+     $videos = $videos['body'];
+     //var_dump($videos);
+     $video_count = $videos['total'];
+     $video_array = $videos['data'];
+     //var_dump($video_array);
+	 $videos = array();
+	 $counter=0;
+     foreach ($video_array as $video) {
+
+         if($counter <= 10){
+		$new_video_uri = str_replace('/videos/','',$video['uri']);
+
+		echo $video['name'];
+		echo '<br/>';
+		 echo '<html>
+		 <head>
+		   <title>{page_title}</title>
+		 </head>
+		 <body>
+		   <iframe src="https://player.vimeo.com/video/'.$new_video_uri.'" width="{video_width}" height="{video_height}" frameborder="0" title="{video_title}" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		 </body>
+		 </html>';
+		 echo '<br/>';
+
+		 $counter=$counter+1;
+		   }
+		   else break;
+
+     }
+
+?>
