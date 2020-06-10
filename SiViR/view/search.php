@@ -165,37 +165,61 @@ $controller = new Controller();
 
 	<?php
 		$URL = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-		$str = "<?xml version='1.0'  encoding='UTF-8' ?>\n";
-		$str .= "<rss version='2.0'>\n";
+		$rss_string = "<?xml version='1.0'  encoding='UTF-8' ?>\n";
+		$rss_string .= "<rss version='2.0'>\n";
 		
-		$str .= "<channel>\n";
-		$str .= "<title>Sivir</title>\n";
-		$str .= "<description>Similar Video Retriever</description>\n";
-		$str .= "<language>en-US</language>\n";
-		$str .= "<link>$URL</link>\n";
+		$rss_string .= "<channel>\n";
+		$rss_string .= "<title>Sivir</title>\n";
+		$rss_string .= "<description>Similar Video Retriever</description>\n";
+		$rss_string .= "<language>en-US</language>\n";
+		$rss_string .= "<link>$URL</link>\n";
 
-		$conn = mysqli_connect("127.0.0.1", "root", "","sivir");
+		$connection = mysqli_connect("127.0.0.1", "root", "","sivir");
 
-		$results = mysqli_query($conn,"SELECT * FROM RESULTS");
+		
+		//$results = mysqli_query($conn,"SELECT * FROM RESULTS");
+		$sql="SELECT * FROM RESULTS";
+		$stmt = $connection->prepare($sql);
+		$stmt->execute();
+		$rss_results = $stmt->get_result();
 
-		// $stmt = $mysqli->prepare("SELECT * FROM RESULTS");
-		// $stmt->execute();
-		// $results = $stmt->get_result();
-
-		while($row = mysqli_fetch_object($results)){
-			$str .= "<item>";
-			$str .= "<title>$row->TITLE</title>";
-			$str .= "<link>$row->LINK</link>";
-			$str .= "<source>$row->SOURCE</source>";
-			$str .= "</item>";
+		while($row = mysqli_fetch_object($rss_results)){
+			$rss_string .= "<item>";
+			$rss_string .= "<title>$row->TITLE</title>";
+			$rss_string .= "<link>$row->LINK</link>";
+			$rss_string .= "<source>$row->SOURCE</source>";
+			$rss_string .= "</item>";
 		}
 
-		$str .="</channel>";
-		$str .="</rss>";
+		$rss_string .="</channel>";
+		$rss_string .="</rss>";
 
-		file_put_contents("my_rss.xml",$str);
+		file_put_contents("my_rss.xml",$rss_string);
 	?>
 	
+	<!-- CSV EXPORT -->
+	<?php
+		$connection = mysqli_connect("127.0.0.1", "root", "","sivir");
+		
+		//$results = mysqli_query($conn,"SELECT * FROM RESULTS");
+		$sql="SELECT * FROM RESULTS";
+		$stmt = $connection->prepare($sql);
+		$stmt->execute();
+		$csv_results = $stmt->get_result();
+		$csv_string = "";
+		
+		while($row = mysqli_fetch_object($csv_results)){
+			$csv_string .= $row->TITLE;
+			$csv_string .= ",";
+			$csv_string .= $row->LINK;
+			$csv_string .= ",";
+			$csv_string .= $row->SOURCE;
+			$csv_string .= "\n";
+		}
+
+		file_put_contents("my_csv.csv",$csv_string);
+	?>
 	
 
+	
 <?php include('bottom.php'); ?>
