@@ -1,10 +1,13 @@
 <?php include('top_search.php');
-require_once 'controller.php';
+require_once 'D:\XAMPP\htdocs\SiViR\controller\controller.php';
 $controller = new Controller();
 ?>
 
 <head>
+<meta charset="utf-8" />
+<title>SiViR</title>
 <link rel="stylesheet" type="text/css" href="public/css/search_style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <div class="goto-index">
@@ -42,13 +45,15 @@ $controller = new Controller();
 							$title = $item['snippet']['title'];
 							
 							$counter1 = $counter1 + 1;
+							$source ='youtube';
+							$controller->insert($title,$url,$source);
 							
 
 		?>
 
 							
 							<div class="youtube-video">
-								<iframe width="280" height="150" src="<?= $url ?>" frameborder="0" allowfullscreen></iframe>
+								<iframe width="312" height="410" src="<?= $url ?>" frameborder="0" allowfullscreen></iframe>
 							</div>
 								
 						<?php   }

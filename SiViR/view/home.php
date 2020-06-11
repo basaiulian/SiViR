@@ -35,13 +35,13 @@
 
 <div class="sources">
     <div id="insta">
-        <img id=insta_img src="public/img/insta_color.png" />
+        <img alt="Instagram logo" id=insta_img src="public/img/insta_color.png" />
     </div>
     <div id="yt">
-        <img id=yt_img src="public/img/yt_color.png" />
+        <img alt="YouTube logo" id=yt_img src="public/img/yt_color.png" />
     </div>
     <div id="vimeo">
-        <img id=vimeo_img src="public/img/vimeo_color.png" />
+        <img alt="Vimeo logo" id=vimeo_img src="public/img/vimeo_color.png" />
     </div>
 
     <div id="poll-border">

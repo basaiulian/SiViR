@@ -10,14 +10,15 @@
 
 	<script>
 		function getVote(int) {
-  			var xmlhttp=new XMLHttpRequest();
-  			xmlhttp.onreadystatechange=function() {
-    			if (this.readyState==4 && this.status==200) {
+  			var xml_http_request=new XMLHttpRequest();
+  			xml_http_request.onreadystatechange=function() { // called at readyState change
+    			if (this.readyState==4 && this.status==200) { // request finished and response ready && status OK
       				document.getElementById("poll").innerHTML=this.responseText;
     			}
   			}
-  			xmlhttp.open("GET","poll_vote.php?vote="+int,true);
-  			xmlhttp.send();
+  			xml_http_request.open("GET","poll_vote.php?vote="+int,true); // initialize newly-created request or re-initialize one
+			  												    // GET method, url, true for async
+  			xml_http_request.send(); //sends the request to the server
 		}
 	</script>
 
@@ -25,7 +26,7 @@
 
 <body>
 	<div class="header">
-		<a href="index.php" class="logo"><img src="public/img/logoF.png" /></a>
+		<a href="index.php" class="logo"><img src="public/img/logoF.png" alt="SiViR logo" /></a>
 
 		<div class="header-right">
 			<a href="view/user_guide.html" id="right-button"> User Guide </a>

@@ -1,5 +1,5 @@
 <?php
-require_once 'model.php';
+require_once 'D:\XAMPP\htdocs\SiViR\model\model.php';
 require_once 'C:\Users\basai\vendor\vimeo\vimeo-api\autoload.php';
 
 require 'vendor/autoload.php';

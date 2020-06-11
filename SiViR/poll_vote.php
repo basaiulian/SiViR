@@ -21,7 +21,7 @@ fputs($file,$add_new_vote);
 fclose($file);
 ?>
 
-<h2>Do you like this website?</h2>
+<h2>Thank you!</h2>
 
 <table>
   <tr>

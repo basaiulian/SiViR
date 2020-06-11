@@ -1,8 +1,8 @@
 <?php
-require_once 'model.php';
-require_once 'controller.php';
-require_once 'config.php'; 
-require_once 'functions.php'; 
+require_once 'D:\XAMPP\htdocs\SiViR\model\model.php';
+require_once 'D:\XAMPP\htdocs\SiViR\controller\controller.php';
+require_once 'D:\XAMPP\htdocs\SiViR\controller\config.php'; 
+require_once 'D:\XAMPP\htdocs\SiViR\controller\functions.php'; 
 
 $controller = new Controller();
 $model = new Model();
