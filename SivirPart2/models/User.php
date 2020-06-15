@@ -32,6 +32,19 @@
       return $stmt;
     }
 
+    public function count(){
+      // Create query
+      $query = 'SELECT COUNT(*) FROM users';
+      
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Execute query
+      $stmt->execute();
+
+      return $stmt;
+    }
+
     // Get Single User
     public function read_single() {
         // Create query
@@ -97,7 +110,7 @@
   // Delete User
   public function delete() {
     // Create query
-    $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+    $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id AND admin <> 1';
 
     // Prepare statement
     $stmt = $this->conn->prepare($query);

@@ -22,17 +22,29 @@ if (isset($_POST['login_user'])) {
   ));
   
   $response = curl_exec($curl);
+
+  $json_result = json_decode($response, true);
+         
   
   curl_close($curl);
 
   if (strpos($response, 'null') !== false) {
     echo "No user found";
 } else {
+
+  if(strcmp($json_result['admin'],"1")==0){
+    $_SESSION['username'] = $username;
+    $_SESSION['success'] = "You are now logged in";
+    header('location: adminAfterLOGIN.php');
+  } else {
+
   $_SESSION['username'] = $username;
   $_SESSION['success'] = "You are now logged in";
   header('location: afterLOGIN.php');
   }
+  }
 }
+
 
 if (isset($_POST['register_user'])) {
   $username = $_POST['username'];
