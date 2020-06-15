@@ -85,6 +85,7 @@ echo
 '<form method="post">
     <input type="text" name="id" placeholder="ID" /><br/>
     <input type="submit" name="delete" id="delete_button" value="Delete User" /><br/>
+    <input type="submit" name="promote" id="promote_button" value="Promote User" /><br/>
 </form>';
 
 
@@ -116,8 +117,42 @@ $response = curl_exec($curl);
 curl_close($curl);
 }
 
+function updateUserById(){
+
+$curl = curl_init();
+
+$id = $_POST['id'];
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "http://localhost/sivirAPI/user/update.php",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "PUT",
+  CURLOPT_POSTFIELDS =>"{\r\n    \"id\": \"".$id."\",\r\n    \"1\": \"1\"\r\n}",
+  CURLOPT_HTTPHEADER => array(
+    "Content-Type: application/json"
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+
+}
+
 if(array_key_exists('delete',$_POST)){
   deleteUserById();
-  Header('Location: '.$_SERVER['PHP_SELF']);
+  echo "<meta http-equiv='refresh' content='0'>";
+  exit;
+}
+
+if(array_key_exists('promote',$_POST)){
+  updateUserById();
+  echo "<meta http-equiv='refresh' content='0'>";
+  exit;
 }
 

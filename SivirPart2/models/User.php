@@ -107,10 +107,37 @@
     return false;
   }
 
+  // Update User
+  public function update() {
+    // Create query
+    $query = 'UPDATE ' . $this->table . '
+                          SET admin = 1
+                          WHERE id = :id AND admin != 2';
+
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+
+    // Clean data
+    $this->id = htmlspecialchars(strip_tags($this->id));
+
+    // Bind data
+    $stmt->bindParam(':id', $this->id);
+
+    // Execute query
+    if($stmt->execute()) {
+      return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s.\n", $stmt->error);
+
+    return false;
+}
+
   // Delete User
   public function delete() {
     // Create query
-    $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id AND admin <> 1';
+    $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id AND admin <> 2';
 
     // Prepare statement
     $stmt = $this->conn->prepare($query);
