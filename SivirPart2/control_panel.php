@@ -1,8 +1,14 @@
+
+
 <?php
+
+echo '<link rel="stylesheet" type="text/css" href="css/control_panel_style.css" />';
+include('top_admin.php');
 include_once 'config/Database.php';
 include_once 'models/User.php';
 session_start();
 
+// Getting number of users
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -26,6 +32,8 @@ $json_count_result = json_decode($response, true);
 
 curl_close($curl);
 
+
+// Getting all users
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -49,6 +57,27 @@ $json_result = json_decode($response, true);
 curl_close($curl);
 
 $user_count=(int)$json_count_result;
+
+
+// Building table
+
+echo
+
+'<div id="manage_users">
+  <form method="post">
+    <input type="text" id="id_input" name="id" placeholder="ID" /><br/>
+    <input type="submit" name="delete" id="btn" value="Delete User" /><br/>
+    <input type="submit" name="promote" id="btn" value="Promote User" /><br/>
+    <input type="submit" name="view_searches" id="btn" value="View User\'s favourites" /><br/>
+  </form>
+</div>';
+
+'<div id="manage_searches">
+  <form action="searches_control_panel.php" method="post">
+    <input type="text" id="id_input" name="id" placeholder="ID" /><br/>
+    <input type="submit" name="view_searches" id="btn" value="View User\'s favourites" /><br/>
+  </form>
+</div>';
 
 echo'
     <table border="1">
@@ -78,19 +107,7 @@ while($user_count>0){
 }
     echo '</table>';
 
-
-    
-
-echo
-'<form method="post">
-    <input type="text" name="id" placeholder="ID" /><br/>
-    <input type="submit" name="delete" id="delete_button" value="Delete User" /><br/>
-    <input type="submit" name="promote" id="promote_button" value="Promote User" /><br/>
-</form>';
-
-
-
-
+// Delete user
 function deleteUserById()
 {
 $curl = curl_init();
@@ -117,6 +134,7 @@ $response = curl_exec($curl);
 curl_close($curl);
 }
 
+// Promote user
 function updateUserById(){
 
 $curl = curl_init();

@@ -1,12 +1,14 @@
+<?php include('top_register.php') ?>
+
 <?php include('server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Registration system PHP and MySQL</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="css/register_style.css">
 </head>
 <body>
-  <div class="header">
+  <div class="headerlogin">
   	<h2>Register</h2>
   </div>
 	

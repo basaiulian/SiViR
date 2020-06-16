@@ -16,10 +16,8 @@
 	<div class="header">
 		<a href="index.php" class="logo"><img src="img/logoF.png" /></a>
 
-		 <div class="header-right">
-      <a href="#" id="right-button"> Favourites </a>
-      <a href="control_panel.php" id="right-button"> Control Panel </a>
-      <a href="home.php?logout='1'" >Logout</a> 
-    
-    </div>
+		<div class="header-right">
+			<a href="user_guide.html" id="right-button"> User Guide </a>
+			<a href="documentation.html" id="right-button"> Documentation </a>
+		</div>
 	</div>

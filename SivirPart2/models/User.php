@@ -4,7 +4,7 @@
     private $conn;
     private $table = 'users';
 
-    // Post Properties
+    // User Properties
     public $id;
     public $username;
     public $email;
@@ -21,7 +21,7 @@
     // Get Users
     public function read() {
       // Create query
-      $query = 'SELECT * FROM users';
+      $query = 'SELECT * FROM '.$this->table.'';
       
       // Prepare statement
       $stmt = $this->conn->prepare($query);

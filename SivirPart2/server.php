@@ -32,7 +32,7 @@ if (isset($_POST['login_user'])) {
     echo "No user found";
 } else {
 
-  if(strcmp($json_result['admin'],"1")==0){
+  if(strcmp($json_result['admin'],"1")==0 || strcmp($json_result['admin'],"2")==0){
     $_SESSION['username'] = $username;
     $_SESSION['success'] = "You are now logged in";
     header('location: adminAfterLOGIN.php');
