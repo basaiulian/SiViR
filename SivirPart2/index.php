@@ -1,47 +1,58 @@
-<?php include('top.php'); ?>
+<?php
 
-<div class="topnav">
-    <div class="search-container">
-        <form action="index.php?page=search" method="post">
-            <input type="text" id="search-by-name" placeholder="Search your videos..." name="search">
-            <button id="submit-button" type="submit" name="search_form"><i class="fa fa-search"></i></button>
+require_once 'config.php'; 
+require_once 'functions.php'; 
+require_once 'database.php'; 
 
-            <div class="criteria">
+session_start();
 
-                <div class="author-criteria">
-                    <input type="text" class="author-input" placeholder="Youtube Channel" id="author-text"
-                        name="author-criteria">
-                </div>
+//routing
+if(isset($_REQUEST['page'])){
 
-                <div class="order-criteria">
-                    <select id="order" value="Any" name="order-criteria">
-                        <option class="order-option" value="relevance"> Order by </option>
-                        <option class="order-option" value="relevance"> Relevance </option>
-                        <option class="order-option" value="date"> Date </option>
-                        <option class="order-option" value="viewCount"> View count </option>
-                    </select>
+	switch ($_REQUEST['page']) {
 
-                </div>
+		case 'login':
+	    	require_once 'controllers/login.php';
+	    	$controller = new LoginController();
+	    	$controller->loadContent();
+			break;
 
-        </form>
-    </div>
-</div>
+		case 'logout':
+	    	require_once 'controllers/logout.php';
+	    	$controller = new LogoutController();
+	    	$controller->loadContent();
+	    	break;
+
+		case 'register':
+	    	require_once 'controllers/register.php';
+	    	$controller = new RegisterController();
+	    	$controller->loadContent();
+	    	break;
+
+		case 'control_panel':
+			checkAdminLogged();
+	    	require_once 'controllers/control_panel.php';
+	    	$controller = new ControlPanelController();
+	    	$controller->loadContent();
+		break;
+
+		case 'videos':
+			require_once 'controllers/videos.php';
+			$controller = new VideoController();
+			$controller->loadContent();
+			break;
+		
+		default:
+			require_once 'views/404.php';
+			break;
+	}
+}
+else{
+	require_once 'controllers/home.php';
+	$controller = new HomeController();
+	$controller->loadContent();
+}
+
+?>
 
 
-<div class="sources">
-    <div id="insta">
-        <img id=insta_img src="img/insta_color.png" />
-    </div>
-    <div id="yt">
-        <img id=yt_img src="img/yt_color.png" />
-    </div>
-    <div id="vimeo">
-        <img id=vimeo_img src="img/vimeo_color.png" />
-    </div>
-
-   
-
-
-</div>
-
-<?php include('bottom.php'); ?>

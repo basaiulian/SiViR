@@ -1,0 +1,130 @@
+* {
+  margin: 0%;
+  padding: 0%;
+}
+body {
+  font-size: 1.5vw;
+    min-width: 350px;
+ /* overflow-x: hidden;*/
+
+/*background-image: url("blue1.png");*/
+background-image: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.3)), url("../img/abstract.jpg");
+
+  background-position: center center;
+
+  background-attachment: fixed;
+  
+  background-size: cover;
+}
+
+h2{
+
+  font-size: 1.5vw;
+}
+
+.headerlogin {
+  width: 30%;
+
+  margin: 5% auto 0px;
+  color: black;
+   background-image: linear-gradient(to right, white , lightblue);
+  text-align: center;
+  align-items: center;
+  border: 1px solid #B0C4DE;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
+}
+form, .content {
+  width: 30%;
+  margin: 0px auto;
+  padding: 20px;
+  border: 1px solid #B0C4DE;
+  border-top: none;
+  background: white;
+  border-radius: 0px 0px 10px 10px;
+
+}
+.input-group {
+  margin: 10px 0px 10px 0px;
+  font-size: 1.5vw;
+}
+.input-group label {
+  display: block;
+  text-align: left;
+  margin: 3px;
+   font-size: 1.5vw;
+}
+.input-group input {
+  height: 30px;
+  width: 93%;
+  padding: 5px 10px;
+  font-size: 1.5vw;
+  border-radius: 5px;
+  border: 1px solid gray;
+  background-image: linear-gradient(to right, lightblue , white);
+}
+.btn {
+  padding: 10px;
+  padding-right:13px;
+  font-size: 1vw;
+  color: white;
+  background: #3498db;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #3e56b5;
+  color: white;
+  transition: 0.5s ease;
+}
+
+p{
+  font-style: italic;
+  text-align: right;
+   font-size: 1.5vw;
+
+}
+a{
+  font-size:1.5vw;
+}
+
+
+
+@media screen and (max-width: 500px){
+
+   .headerlogin {
+  width: 60%;
+  margin-top: 15%;
+
+  padding: 20px;
+}
+form, .content {
+  width: 60%;
+
+
+}
+
+p{
+  font-size: 4vw;
+}
+
+.btn {
+ 
+  font-size: 4vw;
+
+  
+}
+a{
+  font-size:4vw;
+}
+.input-group label {
+
+   font-size: 4vw;
+}
+h2{
+
+  font-size: 4vw;
+}
+}
