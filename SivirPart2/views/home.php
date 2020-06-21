@@ -5,9 +5,9 @@ include('top.php');
 
 <div class="topnav">
     <div class="search-container">
-        <form method="post">
+        <form action="videos.php" method="post">
             <input type="text" id="search-by-name" placeholder="Search your videos..." name="search">
-            <button id="submit-button"  formaction="index.php?page=videos" type="submit" name="search_form"><i class="fa fa-search"></i></button>
+            <button id="submit-button"  formaction="videos.php" type="submit" name="search_form"><i class="fa fa-search"></i></button>
 
             <div class="criteria">
 

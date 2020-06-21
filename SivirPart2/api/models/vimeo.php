@@ -1,11 +1,9 @@
 <?php
 
-
-require_once 'C:\Users\basai\vendor\vimeo\vimeo-api\autoload.php';
-require_once 'models/user.php';
+require_once 'vendor/vimeo/vimeo-api/autoload.php';
     // Instantiate DB & connect
 require_once '../database.php';
-
+require_once 'models/video.php';
 
 
 class VimeoModel{
@@ -25,7 +23,7 @@ class VimeoModel{
     }
 
 
-       public function create($current_video_id){
+   public function create($current_video_id){
 
         $query = 'INSERT INTO ' . $this->table . ' SET
             username = :username,
@@ -46,38 +44,77 @@ class VimeoModel{
 
     }
 
-    public function makeRequestVIMEO($keyword){
+    public function searchVideo($keyword, $duration, $order){
 
         $vimeo = new \Vimeo\Vimeo(CLIENT_ID, CLIENT_SECRET, TOKEN);
 
-        //   $order="relevant";
-        // if(strcmp(strtoupper($order),"VIEWCOUNT")===0){
-        //     $order="plays";
-        // } else if(strcmp(strtoupper($order),"RELEVANCE")===0){
-        //     $order="relevant";
-        // } else if(strcmp(strtoupper($order),"DATE")===0){
-        //     $order="date";
-        // }
+        switch($duration){
+            case 'short':
+                $minDuration = '0:0:01';
+                $maxDuration = '0:3:30';
+                break;
+            case 'medium':
+                $minDuration = '0:3:31';
+                $maxDuration = '0:15:00';
+                break;
+            case 'long':
+                $minDuration = '0:15:01';
+                $maxDuration = '10:00:00';
+                break;
+            default:
+                $minDuration = '0:0:01';
+                $maxDuration = '0:3:30';
+                break;
+                
+        }
 
-       
+        switch(strtoupper($order)){
+            case 'RELEVANCE':
+                $vimeoOrder = 'relevant';
+                break;
+            case 'VIEWCOUNT':
+                $vimeoOrder = 'plays';
+                break;
+            case 'DATE':
+                $vimeoOrder = 'date';
+                break;
+            default:
+                $vimeoOrder = 'relevant';
+                break;
+        }
+
         $keyword = str_replace("#","",$keyword);
-       /* $videos = $vimeo->request('/videos?query=' . $keyword . '&filter=content_rating&filter_content_rating=language');*/
-        $videos = $vimeo->request('/videos?query=' . $keyword .'&filter=featured');
-       /* $videos = $vimeo->request('/videos?query=' . $keyword . '&filter=duration&min_duration=0:5:00&max_duration=0:6:00');*/
+        $videos = $vimeo->request('/videos?query=' . $keyword .'&sort='.$vimeoOrder.'&filter=duration&min_duration='.$minDuration.'&max_duration='.$maxDuration);
         $videos = $videos['body'];
         if(is_array($videos) && $videos['total'] >=1 ) {
         $video_count = $videos['total'];
         $response = $videos['data'];
 
-        $response=htmlspecialchars(json_encode($response));
-
         } else {
             $response = (array) null; //array gol
         }
-        
-            $videos = array();
 
-        return $response;
+        $res = array();
+
+        foreach($response as $item){
+
+            $new_video_uri = str_replace('/videos/', '', $item['uri']);
+            $type ='vimeo';
+            $video_src=$item['link'];
+            $video_id=$item['uri'];
+            $title=$item['name'];
+            $description=$item['description'];
+            $thumbnail='';
+            $author=$item['name'];
+
+            $video = new VideoModel($type, $video_src, $video_id, $title, $description, $thumbnail, $author);
+
+            $video = $video->toArray();
+
+            array_push($res, $video);
+        }
+        
+        return $res;
 
     }
 

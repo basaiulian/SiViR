@@ -8,19 +8,33 @@ require_once '../config.php';
 
 $vimeo = new VimeoModel();
 
-if(!isset($_POST['action']))
+if(!isset($_GET['action']))
 	die();
 
-switch ($_POST['action']) {
+switch ($_GET['action']) {
 
     case 'search':
-        if(!isset($_POST['keyword']))
+        if(!isset($_GET['keyword']))
         die();
 
-        $keyword = htmlspecialchars($_POST['keyword']);
+        if(!isset($_GET['duration'])){
+			$duration='short';
+		} else {
+			$duration = htmlspecialchars(strip_tags($_GET['duration']));
+        }
+        
+        if(!isset($_GET['order'])){
+			$order='short';
+		} else {
+			$order = htmlspecialchars(strip_tags($_GET['order']));
+		}
 
-		$output = array('vimeo_videos' => $vimeo->makeRequestVIMEO($keyword));
-		// echo json_encode($output);
+        $keyword = htmlspecialchars($_GET['keyword']);
+
+        $output = $vimeo->searchVideo($keyword, $duration, $order);
+
+        echo json_encode($output);
+
 		break;
 	
 	default:
