@@ -34,13 +34,7 @@ if(isset($_REQUEST['page'])){
 	    	require_once 'controllers/control_panel.php';
 	    	$controller = new ControlPanelController();
 	    	$controller->loadContent();
-		break;
-
-		case 'videos':
-			require_once 'controllers/videos.php';
-			$controller = new VideoController();
-			$controller->loadContent();
-			break;
+	    	break;
 		
 		default:
 			require_once 'views/404.php';

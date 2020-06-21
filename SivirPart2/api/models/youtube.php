@@ -1,18 +1,13 @@
 <?php
 
-require_once '../autoload.php';
-require_once 'models/user.php';
-    // Instantiate DB & connect
+require_once '../vendor/autoload.php';
+// Instantiate DB & connect
 require_once '../database.php';
+require_once 'models/video.php';
 
-class YouTube{
+class YouTubeModel{
     private $conn;
-    private $table='youtube';
-
-    public $video_id;
-    public $username;
-
-    private $response;
+    private $api_key;
 
     private $region_codes_arr = array(
         "Romania" => "RO",
@@ -23,52 +18,54 @@ class YouTube{
     public function __construct(){
         $database = new Database();
         $this->conn = $database->connect();
-        $this->username=$_SESSION;
+        $this->api_key = YOUTUBE_API_KEY;
+
     }
 
-    public function create($current_video_id){
+    public function insertUserVideo($username, $video_id){
 
-        $query = 'INSERT INTO ' . $this->table . ' SET
-            user_id = :user_id,
+        $query = 'INSERT INTO youtube SET
+            username = :username,
             video_id = :video_id
-            
         ';
+
         $stmt = $this->conn->prepare($query);
 
-        $this->video_id = htmlspecialchars(strip_tags($this->video_id));
-        $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+        $username = htmlspecialchars(strip_tags($username));
+        $video_id = htmlspecialchars(strip_tags($video_id));
 
-        // $this->user_id='1';
+        $stmt->bindParam(":video_id", $video_id);
+        $stmt->bindParam(":username", $username);
 
-        $stmt->bindParam(":video_id", $this->video_id);
-        $stmt->bindParam(":user_id", $this->user_id);
+        if( $stmt->execute()){
+            return false;
+        }
 
-        $stmt->execute();
-
-        return $stmt;
-
+        return true;
     }
 
-    public function delete(){
-        $query = 'DELETE FROM ' . $this->table . ' WHERE
+    public function deleteUserVideo($username, $video_id){
+        $query = 'DELETE FROM youtube WHERE
             video_id = :video_id AND
-            user_id = :user_id
+            username = :username
         ';
         $stmt = $this->conn->prepare($query);
 
-        $this->video_id = htmlspecialchars(strip_tags($this->video_id));
-        $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+        $video_id = htmlspecialchars(strip_tags($video_id));
+        $username = htmlspecialchars(strip_tags($username));
 
-        $stmt->bindParam(":video_id", $this->video_id);
-        $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":video_id", $video_id);
+        $stmt->bindParam(":username", $username);
 
-        $stmt->execute();
+        if( $stmt->execute()){
+            return false;
+        }
 
-        return $stmt;
+        return true;
 
     }
 
-    public function getVideos($username){
+    public function getUserVideos($username){
         $query = 'SELECT * FROM  WHERE username = :username';
         
         $stmt = $this->conn->prepare($query);
@@ -96,50 +93,51 @@ class YouTube{
         return $response;
     }
 
-    public function makeRequest($keyword, $order){
+    public function searchVideo($keyword){
 
         $response = [];
     
         $maxResults = 50;
-        $key = 'AIzaSyBr2BuPDgKEE7Ufsg8knoqKZHm4bDcMexk';
-        
-        // durata
-        // autor
 
-		$url = 'https://www.googleapis.com/youtube/v3/search';
+        $url = 'https://www.googleapis.com/youtube/v3/search';
 
-        $curl = curl_init();
+        $data = array(
+                     'part' => 'snippet', 
+                     'q' => $keyword, 
+                     'maxResults' => $maxResults, 
+                     'key' => $this->api_key 
+        );
 
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://www.googleapis.com/youtube/v3/search?order='.$order.'&part=snippet&q='.$keyword.'&maxResults='.$maxResults.'&key='.$key,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        ));
 
-        $response = curl_exec($curl);
-
-        curl_close($curl);
+        $response = getRequest($url, $data);
 
         $json_result = json_decode($response, true);
 
-        $results_count = 30;
-        
-        // user = 
+        $res = array();
 
-        $i=0;
-        while($results_count>0){
-            $current_video_id = $json_result['items'][$i]['id']['videoId'];
-            $i++;
-            $results_count--;
-            $this->create($current_video_id);
+        if($json_result['items'] && count($json_result['items'])>0){
+            foreach ($json_result['items'] as $video) {
+                if(!isset($video['id']['videoId'])){
+                    continue;
+                }
+
+                $type = 'youtube';
+                $video_src = 'https://www.youtube.com/embed/'.$video['id']['videoId'];
+                $video_id = $video['id']['videoId'];
+                $title = htmlspecialchars($video['snippet']['title']);
+                $description = htmlspecialchars($video['snippet']['description']);
+                $thumbnail = $video['snippet']['thumbnails']['medium']['url'];
+                $author = htmlspecialchars($video['snippet']['channelTitle']);
+
+                $video = new VideoModel($type, $video_src, $video_id, $title, $description, $thumbnail, $author);
+
+                $video = $video->toArray();
+
+                array_push($res, $video);
+            }
         }
 
-       
+        return $res;
     }
     
 }

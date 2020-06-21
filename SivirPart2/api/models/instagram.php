@@ -3,7 +3,7 @@
 require_once 'models/user.php';
     // Instantiate DB & connect
 require_once '../database.php';
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use Phpfastcache\Helper\Psr16Adapter;
 
@@ -45,7 +45,7 @@ class InstagramModel{
 
     }
 
-    public function makeRequestINSTAGRAM($keyword){
+    public function searchVideo($keyword){
 
         $instagram = \InstagramScraper\Instagram::withCredentials('sivir_app', 'instascraper', new Psr16Adapter('Files'));
 		$instagram->saveSession();
@@ -56,11 +56,32 @@ class InstagramModel{
 	    if ($result['hasNextPage'] === true) {
     		$result = $instagram->getPaginateMediasByTag($keyword, $result['maxId']);
 			$medias = array_merge($medias, $result['medias']);
-	}
+    	}
 
-        return $medias;
+        $res = array();
+
+        foreach($medias as $item){
+            if(!$item->getType() == 'video'){
+                continue;
+            }
+            
+            $type = 'instagram';
+            $video_src = $item->getLink();
+            $video_id = $item->getLink();
+            $title = $item->getCaption();
+            $description = $item->getCaption();
+            $thumbnail = $item->getImageThumbnailUrl();
+            $author = $item->getOwnerId();
+
+            $video = new VideoModel($type, $video_src, $video_id, $title, $description, $thumbnail, $author);
+
+            $video = $video->toArray();
+
+            array_push($res, $video);
+        }
+
+        return $res;
 
     }
-
 
 }
