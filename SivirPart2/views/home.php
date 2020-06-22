@@ -2,36 +2,46 @@
 setPageTitle('Homepage');
 include('top.php'); 
 ?>
-
 <div class="topnav">
     <div class="search-container">
-        <form action="videos.php" method="post">
-            <input type="text" id="search-by-name" placeholder="Search your videos..." name="search">
-            <button id="submit-button"  formaction="videos.php" type="submit" name="search_form"><i class="fa fa-search"></i></button>
+        <div class="searchBox">
 
-            <div class="criteria">
+            <input type="text" class="searchField" id="search-by-name" placeholder="Search your videos...">
 
-                <div class="author-criteria">
-                    <input type="text" class="author-input" placeholder="Youtube Channel" id="author-text"
-                        name="author-criteria">
-                </div>
+            <select id="order" class="searchField">
+                <option value="relevance"> The Most Relevant </option>
+                <option value="date"> The Most Recent </option>
+                <option value="viewCount"> The Most Viewed </option>
+            </select>
 
-                <div class="order-criteria">
-                    <select id="order" value="Any" name="order-criteria">
-                        <option class="order-option" value="relevance"> Order by </option>
-                        <option class="order-option" value="relevance"> Relevance </option>
-                        <option class="order-option" value="date"> Date </option>
-                        <option class="order-option" value="viewCount"> View count </option>
-                    </select>
+            <select id="duration" class="searchField">
+                <option value="short"> Duration </option>
+                <option value="short"> Short </option>
+                <option value="medium"> Medium </option>
+                <option value="long"> Long </option>
+            </select>
 
-                </div>
+            <select id="website" class="searchField">
+                <option value="any"> Website </option>
+                <option value="youtube"> Youtube </option>
+                <option value="instagram"> Instagram </option>
+                <option value="vimeo"> Vimeo </option>
+            </select>
 
-        </form>
+            <button id="submit-button" class="searchField"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="videosBox" id="videosBox">
+    <div class="loadingVideos" id="loadingVideos">
+        <img src="public/img/loading.gif" width="60" />
+        <p>Loading videos</p>
     </div>
 </div>
 
 
-<div class="sources">
+<!-- <div class="sources">
     <div id="insta">
         <img id=insta_img src="public/img/insta_color.png" />
     </div>
@@ -41,15 +51,25 @@ include('top.php');
     <div id="vimeo">
         <img id=vimeo_img src="public/img/vimeo_color.png" />
     </div>
-</div>
+</div> -->
 
 <!-- <button id="openModalBtn">Click me</button>
-
+ -->
 <div class="modal" id="modal">
     <div class="modalContent">
         <button id="closeModal">Close</button>
+        <div class="modalVideosContent"></div>
     </div>
-</div> -->
+</div>
+
+<script type="text/javascript">
+function closeModal(){
+    document.getElementById('modal').style.display='none';
+    document.getElementById('modal').getElementsByClassName('modalVideosContent')[0].innerHTML = '';
+}
+
+document.getElementById('closeModal').addEventListener('click',closeModal);
+</script>
 
 <script type="text/javascript" src="public/js/home.js"></script>
 

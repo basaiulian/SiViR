@@ -6,11 +6,11 @@ include('top.php');
 <link rel="stylesheet" type="text/css" href="public/css/control_panel_style.css" />
 
 <div id="manage_users">
-  <form method="post" action="searches_control_panel.php">
-    <input type="text" id="id_input" name="id" placeholder="ID" /><br/>
-    <input type="submit" name="delete" id="btn" value="Delete User" /><br/>
-    <input type="submit" name="promote" id="btn" value="Promote User" /><br/>
-    <input type="submit" name="view_searches" id="btn" value="View User\'s Searches" /><br/>
+  <form method="post">
+    <input type="text" id="username_input" name="username" placeholder="Username" /><br/>
+    <input type="submit" name="delete" id="deleteBtn" onClick="window.location.reload();" value="Delete User" /><br/>
+    <input type="submit" name="promote" id="promoteBtn" onClick="window.location.reload();" value="Promote User" /><br/>
+    <input type="submit" name="view_searches" id="viewSearchesBtn" onClick="window.location.reload();" value="View User\'s Searches" /><br/>
   </form>
 </div>
 
@@ -46,4 +46,5 @@ foreach($this->users as $user){
 </table>
 <?php  ?>
 
+<script type="text/javascript" src="public/js/control_panel.js"></script>
 <?php include('bottom.php'); ?>
