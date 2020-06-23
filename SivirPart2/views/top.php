@@ -31,17 +31,28 @@ else
 			<a href="user_guide.html" target="_blank" id="right-button"> User Guide </a>
 			<a href="documentation.html" target="_blank" id="right-button"> Documentation </a>
 			<?php } 
+<<<<<<< HEAD
 
 			elseif(isset($_SESSION['admin'])){ ?>
 			<span class="welcome_message">[Admin] Welcome, <?php echo $_SESSION['username']; ?> ! </span>
 		    <a href="index.php?page=favourites" id="right-button"> My Feed </a>
+=======
+			
+			elseif(isset($_SESSION['admin'])){ ?>
+			<span class="welcome_message">[Admin] Welcome, <?php echo $_SESSION['username']; ?> ! </span>
+		    <a href="index.php?page=favourites" id="right-button"> Favourites </a>
+>>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 		    <a href="index.php?page=control_panel" id="right-button"> Control Panel </a>
 		    <a href="index.php?page=logout" >Logout</a> 
 			<?php } 
 			else{ ?>
 
 			<span class="welcome_message"> Welcome, <?php echo $_SESSION['username']; ?> ! </span>
+<<<<<<< HEAD
 	        <a href="index.php?page=favourites" id="right-button"> My Feed </a>
+=======
+	        <a href="index.php?page=favourites" id="right-button"> Favourites </a>
+>>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
             <a href="user_guide.html" id="right-button" target="_blank"> User Guide </a>
             <a href="documentation.html" id="right-button" target="_blank"> Documentation </a>
 			<a href="index.php?page=logout" id="right-button"> Logout </a>

@@ -113,6 +113,7 @@ switch ($_POST['action']) {
 			break;
 	case 'getFavourites':
 		$output = array($user->getFavourites());
+<<<<<<< HEAD
 		$user->rssFeed($output);
 		$user->csvExport($output);
 		echo json_encode($output);
@@ -124,6 +125,10 @@ switch ($_POST['action']) {
 		echo json_encode($output);
 	break;
 
+=======
+		echo json_encode($output);
+	break;
+>>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 	default:
 		die();
 		break;

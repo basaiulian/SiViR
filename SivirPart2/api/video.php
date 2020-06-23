@@ -41,6 +41,7 @@ switch ($_GET['action']) {
 
         $keyword = htmlspecialchars($_GET['keyword']);
 
+<<<<<<< HEAD
         if(strstr($keyword, "youtube.com")){
 
             $youtube = new YoutubeModel();
@@ -64,6 +65,10 @@ switch ($_GET['action']) {
         $user = new UserModel();
 
         $user->insertKeyword($keyword);
+=======
+        $output = $video->searchVideo($keyword, $duration, $order, $types);
+        
+>>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 
         echo json_encode($output);
 
@@ -111,6 +116,7 @@ switch ($_GET['action']) {
         if(!isset($_GET['keyword']))
         die();
 
+<<<<<<< HEAD
         if(!isset($_GET['duration'])){
 			$duration='short';
 		} else {
@@ -129,6 +135,8 @@ switch ($_GET['action']) {
 			$order = htmlspecialchars(strip_tags($_GET['order']));
 		}
 
+=======
+>>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
         if(!isset($_GET['type1']))
         die();
 
@@ -144,8 +152,13 @@ switch ($_GET['action']) {
         $type2 = htmlspecialchars($_GET['type2']);
         $type3 = htmlspecialchars($_GET['type3']);
 
+<<<<<<< HEAD
         $output = $video->filterByDescriptionSimilarity($video->filterByOneType($video->searchVideo($keyword, $duration, $order, $types), $type1), $video->filterByOneType($video->searchVideo($keyword, $duration, $order, $types), $type2), 
             $video->filterByOneType($video->searchVideo($keyword, $duration, $order, $types), $type3));
+=======
+        $output = $video->filterByDescriptionSimilarity($video->filterByType($video->searchVideo($keyword), $type1), $video->filterByType($video->searchVideo($keyword), $type2), 
+            $video->filterByType($video->searchVideo($keyword), $type3));
+>>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 
         echo json_encode($output);
 
@@ -155,6 +168,7 @@ switch ($_GET['action']) {
         if(!isset($_GET['keyword']))
         die();
 
+<<<<<<< HEAD
         if(!isset($_GET['duration'])){
 			$duration='short';
 		} else {
@@ -173,6 +187,8 @@ switch ($_GET['action']) {
 			$order = htmlspecialchars(strip_tags($_GET['order']));
 		}
 
+=======
+>>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
         if(!isset($_GET['type1']))
         die();
     
@@ -188,8 +204,13 @@ switch ($_GET['action']) {
         $type3 = htmlspecialchars($_GET['type3']);
 
     
+<<<<<<< HEAD
         $output = $video->filterByTitleSimilarity($video->filterByOneType($video->searchVideo($keyword, $duration, $order, $types), $type1), $video->filterByOneType($video->searchVideo($keyword, $duration, $order, $types), $type2), 
         $video->filterByOneType($video->searchVideo($keyword, $duration, $order, $types), $type3));
+=======
+        $output = $video->filterByTitleSimilarity($video->filterByType($video->searchVideo($keyword), $type1), $video->filterByType($video->searchVideo($keyword), $type2), 
+        $video->filterByType($video->searchVideo($keyword), $type3));
+>>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
     
         echo json_encode($output);
     
