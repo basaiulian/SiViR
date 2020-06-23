@@ -70,7 +70,19 @@ switch ($_POST['action']) {
 
 		$username = $_POST['username'];
 
-		$output = array('users' => $user->update($username));
+		$output = array('users' => $user->update($username,"promote"));
+		echo json_encode($output);
+		break;
+
+	case 'demoteUser':
+
+		if(!isset($_POST['username'])){
+			die();
+		}
+	
+		$username = $_POST['username'];
+	
+		$output = array('users' => $user->update($username,"demote"));
 		echo json_encode($output);
 		break;
 	
@@ -113,7 +125,6 @@ switch ($_POST['action']) {
 			break;
 	case 'getFavourites':
 		$output = array($user->getFavourites());
-<<<<<<< HEAD
 		$user->rssFeed($output);
 		$user->csvExport($output);
 		echo json_encode($output);
@@ -125,10 +136,6 @@ switch ($_POST['action']) {
 		echo json_encode($output);
 	break;
 
-=======
-		echo json_encode($output);
-	break;
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 	default:
 		die();
 		break;

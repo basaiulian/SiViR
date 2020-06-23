@@ -92,11 +92,7 @@ margin-top: 0.5%;
   padding: 10px;
   font-size: 17px;
   border:1px solid #4A8FE1;
-<<<<<<< HEAD
   width: 42%;
-=======
-  width: 40%;
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
   font-style: oblique;
   background: linear-gradient(155deg,#B0C1E3,#82A7F1,#3498db);
   float:left;
@@ -104,7 +100,6 @@ margin-top: 0.5%;
   margin: 0px 1%;
 }
 
-<<<<<<< HEAD
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
@@ -145,8 +140,6 @@ margin-top: 0.5%;
   color: #ffffff;
 }
 
-=======
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 #website,#order,#duration{
   padding: 10px;
   font-size: 17px;
@@ -270,12 +263,6 @@ border-color:#82A7F1;
   opacity: 1; 
 }
 
-.sources{
-  bottom:0px;
-  display: flex;
-  width: 100%;
-
-}
 
 #insta{
   display: block;
@@ -323,7 +310,6 @@ border-color:#82A7F1;
   border-radius: 50px;
 }
 
-<<<<<<< HEAD
 #rssFloatingButton:hover {
   background-color: #c98405;
 }
@@ -343,21 +329,6 @@ border-color:#82A7F1;
   padding: 15px;
   border-radius: 50px;
 }
-=======
-.content{
-  min-height:100%;
-   position:relative;
-}
-
-#footerCard{
-  position:absolute;
-   bottom:0;
-   width:100%;
-   height:20%;
-   background: black;
-}
-   
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 
 #csvFloatingButton:hover {
   background-color: #056302;
@@ -398,33 +369,82 @@ border-color:#82A7F1;
   border-radius: 50px;
 }
 
+div.sugestRes{
+  position: absolute;
+  top: 45px;
+  background: #fff;
+  padding: 7px;
+  border-radius: 10px;
+  left: 1%;
+  width: 40%;
+  cursor: pointer;
+}
+
 #homeFloatingButton:hover {
   background-color: #3498db;
 }
 
 @media screen and (max-width: 1100px){
 
-   .sources{
-    display: inline-block;
-    left:25%;
+  #youtube_iframe{
+    width: 450px;
+    margin-top: 15%;
   }
+
+  #instagram_iframe{
+    width: 450px;
+    margin-top: 15%;
+  }
+
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1250px){
+  #vimeo_iframe{
+    width: 700px;
+    margin-top: 15%;
+  }
 
+}
+
+@media screen and (max-width: 760px) and (min-width: 500px) {
+  #vimeo_iframe{
+    width: 500px;
+    margin-top: 15%;
+  }
+
+}
+
+@media screen and (max-width: 520px) {
+
+  span.welcome_message{
+    width: 100%;
+  }
+
+  #youtube_iframe{
+    width: 300px;
+    margin-top: 25%;
+  }
+
+  #vimeo_iframe{
+    width: 300px;
+    margin-top: 25%;
+  }
+
+  #instagram_iframe{
+    width: 300px;
+    margin-top: 25%;
+  }
 
   video{
     display: block;
   }
 
   .Thumbnail{
-    /* flex:1; */
     width: 100%;
   }
 
   .videoData{
     width: 100%;
-    /* flex:1; */
     font-size:1vw;
   }
 
@@ -434,11 +454,6 @@ border-color:#82A7F1;
     margin-top: 10px !important;
   }
 
-  .sources{
-    position: relative;
-    display: inline-block;
-    left: 0px;
-  }
 
   #submit-button{
     display: block;
@@ -583,10 +598,7 @@ div.videosBox{
   margin: 0px auto;
   border-radius: 20px;
   padding: 20px;
-<<<<<<< HEAD
   margin-bottom: 40px;
-=======
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 }
 
 div.loadingVideos{
@@ -617,11 +629,8 @@ div.modal{
   background: #fff;
   position: relative;
   height: 96%;
-<<<<<<< HEAD
   border: 2px white;
   border-radius: 30px;
-=======
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 }
 
 #closeModal{

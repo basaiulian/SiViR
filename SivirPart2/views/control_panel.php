@@ -10,7 +10,7 @@ include('top.php');
     <input type="text" id="username_input" name="username" placeholder="Username" /><br/>
     <input type="submit" name="delete" id="deleteBtn" onClick="window.location.reload();" value="Delete User" /><br/>
     <input type="submit" name="promote" id="promoteBtn" onClick="window.location.reload();" value="Promote User" /><br/>
-    <input type="submit" name="view_searches" id="viewSearchesBtn" onClick="window.location.reload();" value="View User\'s Searches" /><br/>
+    <input type="submit" name="view_searches" id="demoteBtn" onClick="window.location.reload();" value="Demote User" /><br/>
   </form>
 </div>
 

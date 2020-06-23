@@ -44,7 +44,6 @@ class VimeoModel{
 
     }
 
-<<<<<<< HEAD
     public function searchSpecificVideo($videoId){
         $vimeo = new \Vimeo\Vimeo(CLIENT_ID, CLIENT_SECRET, TOKEN);
 
@@ -62,8 +61,6 @@ class VimeoModel{
 
     }
 
-=======
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
     public function searchVideo($keyword, $duration, $order){
 
         $vimeo = new \Vimeo\Vimeo(CLIENT_ID, CLIENT_SECRET, TOKEN);
@@ -125,11 +122,7 @@ class VimeoModel{
             $title=$item['name'];
             $description=$item['description'];
             $thumbnail='http://localhost/sivir/public/img/vimeo.jpg';
-<<<<<<< HEAD
             $author=' ';
-=======
-            $author='';
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 
             $video = new VideoModel($type, $video_src, $video_id, $title, $description, $thumbnail, $author);
 
@@ -142,10 +135,4 @@ class VimeoModel{
 
     }
 
-<<<<<<< HEAD
-=======
-    //STAI PUTIN
-
-
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 }

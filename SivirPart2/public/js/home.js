@@ -23,7 +23,7 @@ submitButton.addEventListener('click',searchVideos);
 
 closeModalButton.addEventListener('click',closeModal);
 
-window.addEventListener('load',getSearches);
+// window.addEventListener('load',getSearches);
 
 var gifHtml = loadingVideos.outerHTML;
 
@@ -53,7 +53,17 @@ function searchVideos(){
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			loadingVideos.style.display = 'none';
-			let data = JSON.parse(this.responseText);
+			
+			let data = [];
+
+			if(this.responseText.charAt(0)=="<"){
+				console.log("eroare");
+				videosBox.innerHTML="No results";
+			} else {
+				data = JSON.parse(this.responseText);
+			}
+
+			
 
 		    for(let i=0; i<data.length; i++){
 
@@ -134,7 +144,7 @@ function setVideosModals(){
 
 			if(type == 'youtube'){
 				videoIframe = `
-				<iframe width="1200" height="600" src="${video_src}" frameborder="0" allowfullscreen></iframe>
+				<iframe id="youtube_iframe" width="1200" height="600" src="${video_src}" frameborder="0" allowfullscreen></iframe>
 				`;
 			}
 			else 
@@ -193,7 +203,6 @@ function getSearches(){
 				
 				suggestionsArray.push(keyword);
 			}
-			console.log(suggestionsArray);
 		}
 	};
 	xhttp.open("POST", "api/user.php?", true);
@@ -201,6 +210,49 @@ function getSearches(){
 	xhttp.send("action=getSearches");
 
 	return suggestionsArray;
+}
+
+var searchByNameInput = document.getElementById('search-by-name');
+
+var sugestRes = document.getElementById('sugestRes');
+
+var usernameSearches = getSearches();
+
+searchByNameInput.onkeyup = function(){
+
+	sugestRes.innerHTML = '';
+
+	sugestRes.style.padding = "0px";
+	sugestRes.style.border = "0px";
+
+	if(searchByNameInput.value == '')
+		return;
+
+	let ok = 0;
+
+	for(let i=0; i<usernameSearches.length; i++ ){
+
+		if(usernameSearches[i].substr(0, searchByNameInput.value.length).toUpperCase() == searchByNameInput.value.toUpperCase()){
+			sugestRes.innerHTML += `<p onclick="setSugest(this)">${usernameSearches[i]}</p>`;
+			sugestRes.style.padding = "7px";
+			sugestRes.style.border = "1px solid #333";
+			ok = 1;
+		}
+	}
+	
+	if(ok == 1){
+		sugestRes.style.padding = "7px";
+		sugestRes.style.border = "1px solid #333";
+	}
+	
+;};
+
+function setSugest(res){
+	document.getElementById('search-by-name').value=res.innerHTML;
+	document.getElementById('sugestRes').innerHTML='';
+	sugestRes.style.padding = "0px";
+	sugestRes.style.border = "0px";
+
 }
 
 window.onscroll = function() {scrollFunction()};

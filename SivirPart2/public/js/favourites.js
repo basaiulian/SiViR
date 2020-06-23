@@ -4,6 +4,10 @@ var videosBox = document.getElementById('videosBox');
 
 var floatingButton = document.getElementById("floatingButton");
 
+var closeModalButton = document.getElementById('closeModal');
+
+closeModalButton.addEventListener('click',closeModal);
+
 window.addEventListener('load',getVideos);
 
 var gifHtml = loadingVideos.outerHTML;
@@ -76,8 +80,6 @@ function getVideos(){
 
 var openModalBtn = document.getElementById('openModalBtn');
 
-var closeModal = document.getElementById('closeModal');
-
 var modal = document.getElementById('modal');
 
 function setVideosModals(){
@@ -103,20 +105,20 @@ function setVideosModals(){
 
 			if(type == 'youtube'){
 				videoIframe = `
-				<iframe width="1200" height="600" src="${video_src}" frameborder="0" allowfullscreen></iframe>
+				<iframe id="youtube_iframe" width="1000vw" height="600" src="${video_src}" frameborder="0" allowfullscreen></iframe>
 				`;
 			}
 			else 
 				if(type == 'vimeo'){
 				videoIframe = `
-				<iframe src="https://player.vimeo.com/video/${video_id}" width="1200" height="600"
+				<iframe id="vimeo_iframe" src="https://player.vimeo.com/video/${video_id}" width="1200" height="600"
 				 frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
 				`;
 				}
 			else
 				if(type == 'instagram'){
 				videoIframe = `
-				<iframe  height="600" src="${video_src}/embed" frameborder="0" allowfullscreen></iframe>
+				<iframe id="instagram_iframe" height="600" src="${video_src}/embed" frameborder="0" allowfullscreen></iframe>
 				`;
 				}
 				

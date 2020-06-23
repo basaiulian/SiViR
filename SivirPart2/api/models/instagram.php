@@ -54,7 +54,8 @@ class InstagramModel{
         $medias = $result['medias'];
 
 	    if ($result['hasNextPage'] === true) {
-    		$result = $instagram->getPaginateMediasByTag($keyword, $result['maxId']);
+            $result = $instagram->getPaginateMediasByTag($keyword, $result['maxId']);
+            // $result = $instagram->getMediaById("CByKCWZDc5J");
 			$medias = array_merge($medias, $result['medias']);
     	}
 

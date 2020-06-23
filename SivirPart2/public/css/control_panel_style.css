@@ -54,7 +54,7 @@
   background-image: linear-gradient(to right, lightblue , white);
   }
 
-  #deleteBtn, #promoteBtn, #viewSearchesBtn {
+  #deleteBtn, #promoteBtn, #demoteBtn {
     margin-top: 5%;
     padding: 5px 10px;
     padding-right:13px;
@@ -65,7 +65,7 @@
     border-radius: 5px;
   }
   
-  #deleteBtn:hover, #promoteBtn:hover, #viewSearchesBtn:hover {
+  #deleteBtn:hover, #promoteBtn:hover, #demoteBtn:hover {
     background-color: #3e56b5;
     color: white;
     transition: 0.5s ease;
@@ -73,7 +73,7 @@
   
   @media screen and (max-width: 500px){
 
-    #deleteBtn, #promoteBtn, #viewSearchesBtn{
+    #deleteBtn, #promoteBtn, #demoteBtn{
         font-size: 4vw;
     }
 

@@ -138,12 +138,18 @@ class UserModel {
   }
 
   // Update User
-  public function update($username) {
+  public function update($username,$action) {
     // Create query
+    
+    if($action=="promote"){
     $query = 'UPDATE ' . $this->table . '
                           SET admin = 1
                           WHERE username = ? AND admin != 2';
-
+    } else if ($action=="demote"){
+      $query = 'UPDATE ' . $this->table . '
+                          SET admin = 0
+                          WHERE username = ? AND admin != 2';
+    }
     // Prepare statement
     $stmt = $this->conn->prepare($query);
 
@@ -286,20 +292,12 @@ class UserModel {
       // Execute query
       $stmt->execute();
 
-<<<<<<< HEAD
       $favourites_arr = array();
-=======
-      $users_arr = array();
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
 
       while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
 
-<<<<<<< HEAD
         $favourite_item = array(
-=======
-        $user_item = array(
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
           'username' => $username,
           'type' => $type,
           'video_src' => $video_src,
@@ -311,7 +309,6 @@ class UserModel {
         );
 
         // Push every item to "data"
-<<<<<<< HEAD
         array_push($favourites_arr, $favourite_item);
       
       }
@@ -353,12 +350,17 @@ class UserModel {
     }
 
     public function insertKeyword($keyword){
+      
       $query = 'INSERT INTO searches SET
       username = :username,
       keyword = :keyword
       ';
 
+      if(!isset($_SESSION['username'])){
+        return false;
+      } else{
       $username = $_SESSION['username'];
+      }
 
       $stmt = $this->conn->prepare($query);
 
@@ -426,13 +428,6 @@ class UserModel {
       }
 
       file_put_contents("../../sivir/export/my_csv.csv",$csv_string);
-=======
-        array_push($users_arr, $user_item);
-      
-      }
-
-      return $users_arr;
->>>>>>> 91b1c49fc81661ecee48688ae9983caf97121b99
     }
 
 }
