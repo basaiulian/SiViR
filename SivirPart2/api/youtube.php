@@ -18,9 +18,21 @@ switch ($_GET['action']) {
 		if(!isset($_GET['keyword']))
 			die();
 
+		if(!isset($_GET['duration'])){
+			$duration='short';
+		} else {
+			$duration = htmlspecialchars(strip_tags($_GET['duration']));
+		}
+
+		if(!isset($_GET['order'])){
+			$order='relevance';
+		} else {
+			$order = htmlspecialchars(strip_tags($_GET['order']));
+		}
+
 		$keyword = htmlspecialchars(strip_tags($_GET['keyword']));
 
-		$output = $youtube->searchVideo($keyword);
+		$output = $youtube->searchVideo($keyword, $duration, $order);
 
 		echo json_encode($output);
 

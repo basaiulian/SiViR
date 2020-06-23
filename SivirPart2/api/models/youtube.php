@@ -1,6 +1,6 @@
 <?php
 
-require_once '../vendor/autoload.php';
+require_once 'models/vendor/autoload.php';
 // Instantiate DB & connect
 require_once '../database.php';
 require_once 'models/video.php';
@@ -93,7 +93,7 @@ class YouTubeModel{
         return $response;
     }
 
-    public function searchVideo($keyword){
+    public function searchVideo($keyword, $duration, $order){
 
         $response = [];
     
@@ -103,7 +103,10 @@ class YouTubeModel{
 
         $data = array(
                      'part' => 'snippet', 
-                     'q' => $keyword, 
+                     'q' => $keyword,
+                     'order' => $order,
+                     'type' => 'video',
+                     'videoDuration' => $duration,
                      'maxResults' => $maxResults, 
                      'key' => $this->api_key 
         );
@@ -138,6 +141,35 @@ class YouTubeModel{
         }
 
         return $res;
+    }
+
+    public function searchSpecificVideo($keyword){
+
+        $response = [];
+
+        $title = " ";
+    
+        $maxResults = 50;
+
+        $url = 'http://www.youtube.com/oembed';
+
+        $data = array(
+                     'url' => $keyword, 
+                     'format' => 'json'
+        );
+
+        $response = getRequest($url, $data);
+
+        $json_result = json_decode($response, true);
+
+        $title = $json_result['title'];
+
+        if($title == " "){
+            die();
+        } else {
+            return $title;
+        }
+
     }
     
 }

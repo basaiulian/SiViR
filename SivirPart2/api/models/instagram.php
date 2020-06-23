@@ -3,7 +3,7 @@
 require_once 'models/user.php';
     // Instantiate DB & connect
 require_once '../database.php';
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
 use Phpfastcache\Helper\Psr16Adapter;
 
@@ -61,17 +61,18 @@ class InstagramModel{
         $res = array();
 
         foreach($medias as $item){
-            if(!$item->getType() == 'video'){
+            if($item->getType() != 'video'){
                 continue;
             }
             
             $type = 'instagram';
             $video_src = $item->getLink();
             $video_id = $item->getLink();
+            $video_id = str_replace("https://www.instagram.com/p/","",$video_id);
             $title = $item->getCaption();
             $description = $item->getCaption();
             $thumbnail = $item->getImageThumbnailUrl();
-            $author = $item->getOwnerId();
+            $author = ' ';
 
             $video = new VideoModel($type, $video_src, $video_id, $title, $description, $thumbnail, $author);
 

@@ -45,7 +45,7 @@
        
   }
 
-  #id_input {
+  #username_input {
   height: 30px;
   padding: 5px 10px;
   font-size: 1.5vw;
@@ -54,7 +54,7 @@
   background-image: linear-gradient(to right, lightblue , white);
   }
 
-  #btn {
+  #deleteBtn, #promoteBtn, #viewSearchesBtn {
     margin-top: 5%;
     padding: 5px 10px;
     padding-right:13px;
@@ -65,7 +65,7 @@
     border-radius: 5px;
   }
   
-  #btn:hover {
+  #deleteBtn:hover, #promoteBtn:hover, #viewSearchesBtn:hover {
     background-color: #3e56b5;
     color: white;
     transition: 0.5s ease;
@@ -73,7 +73,7 @@
   
   @media screen and (max-width: 500px){
 
-    #btn{
+    #deleteBtn, #promoteBtn, #viewSearchesBtn{
         font-size: 4vw;
     }
 

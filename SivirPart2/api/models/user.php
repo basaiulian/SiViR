@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // Instantiate DB & connect
 require_once '../database.php';
 
@@ -17,6 +19,15 @@ class UserModel {
     public $updated_at;
     public $created_at;
 
+    // Video Properties
+    public $type;
+    public $video_src;
+    public $video_id;
+    public $title;
+    public $description;
+    public $thumbnail;
+    public $author;
+
     private $token;
 
     public $youtube;
@@ -27,18 +38,6 @@ class UserModel {
     public function __construct() {
 		$database = new Database();
 		$this->conn = $database->connect();
-    }
-
-    public function get_user_id(){
-      return $this->id;
-    }
-
-    public function get_token(){
-      return $this->token;
-    }
-
-    public function set_token($new_token){
-      $this->token = $new_token;
     }
 
     // Get Users
@@ -115,6 +114,8 @@ class UserModel {
       // Create query
       $query = 'INSERT INTO ' . $this->table . ' SET username = :username, email = :email, password = md5(:password)';
 
+      // $this->insertVideo('username','','','','','','','');
+
       // Prepare statement
       $stmt = $this->conn->prepare($query);
 
@@ -137,20 +138,17 @@ class UserModel {
   }
 
   // Update User
-  public function update() {
+  public function update($username) {
     // Create query
     $query = 'UPDATE ' . $this->table . '
                           SET admin = 1
-                          WHERE id = :id AND admin != 2';
+                          WHERE username = ? AND admin != 2';
 
     // Prepare statement
     $stmt = $this->conn->prepare($query);
 
-    // Clean data
-    $this->id = htmlspecialchars(strip_tags($this->id));
-
     // Bind data
-    $stmt->bindParam(':id', $this->id);
+    $stmt->bindParam(1, $username);
 
     // Execute query
     if($stmt->execute()) {
@@ -164,18 +162,15 @@ class UserModel {
 }
 
   // Delete User
-  public function delete() {
+  public function delete($username) {
     // Create query
-    $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id AND admin <> 2';
+    $query = 'DELETE FROM ' . $this->table . ' WHERE username = ? AND admin <> 2';
 
     // Prepare statement
     $stmt = $this->conn->prepare($query);
 
-    // Clean data
-    $this->id = htmlspecialchars(strip_tags($this->id));
-
     // Bind data
-    $stmt->bindParam(':id', $this->id);
+    $stmt->bindParam('1', $username);
 
     // Execute query
     if($stmt->execute()) {
@@ -227,6 +222,202 @@ class UserModel {
 
     return false;
   }
+
+  public function insertVideo($username,$type,$video_src,$video_id,$title,$description,$thumbnail,$author)
+    {
+
+     $query = 'INSERT INTO favourite SET
+        username = :username,
+        type = :type,
+        video_src = :video_src,
+        video_id = :video_id,
+        title = :title,
+        description = :description,
+        thumbnail = :thumbnail,
+        author = :author
+    ';
+
+      $username = $_SESSION['username'];
+
+    $stmt = $this->conn->prepare($query);
+
+    $username = htmlspecialchars(strip_tags($username));
+    $type = htmlspecialchars(strip_tags($type));
+    $video_src = htmlspecialchars(strip_tags($video_src));
+    $video_id = htmlspecialchars(strip_tags($video_id));
+    $title = htmlspecialchars(strip_tags($title));
+    $description = htmlspecialchars(strip_tags($description));
+    $thumbnail = htmlspecialchars(strip_tags($thumbnail));
+    $author = htmlspecialchars(strip_tags($author));
+
+
+    $stmt->bindParam(":username", $username);
+    $stmt->bindParam(":type", $type);
+    $stmt->bindParam(":video_src", $video_src);
+    $stmt->bindParam(":video_id", $video_id);
+    $stmt->bindParam(":title", $title);
+    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":thumbnail", base64_decode($thumbnail));
+    $stmt->bindParam(":author", $author);
+
+    if($username!=''){
+      if($stmt->execute()){
+          return false;
+      }
+    }
+
+    return true;
+        
+    }
+
+    // Get Favourites
+    public function getFavourites() {
+
+      // Create query
+      $query = 'SELECT * FROM favourite WHERE username=? ORDER BY created_at DESC';
+
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      $username = $_SESSION['username'];
+
+      $stmt->bindParam(1, $username);
+
+      // Execute query
+      $stmt->execute();
+
+      $favourites_arr = array();
+
+      while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+
+        $favourite_item = array(
+          'username' => $username,
+          'type' => $type,
+          'video_src' => $video_src,
+          'video_id' => $video_id,
+          'title' => $title,
+          'description' => $description,
+          'thumbnail' => $thumbnail,
+          'author' => $author
+        );
+
+        // Push every item to "data"
+        array_push($favourites_arr, $favourite_item);
+      
+      }
+
+      return $favourites_arr;
+    }
+
+    // Get Searches
+    public function getSearches() {
+
+      // Create query
+      $query = 'SELECT DISTINCT * FROM searches WHERE username=? ';
+
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      $username = $_SESSION['username'];
+
+      $stmt->bindParam(1, $username);
+
+      // Execute query
+      $stmt->execute();
+
+      $searches_arr = array();
+
+      while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+
+        $search_item = array(
+          'keyword' => $keyword
+        );
+
+        // Push every item to "data"
+        array_push($searches_arr, $search_item);
+      
+      }
+
+      return $searches_arr;
+    }
+
+    public function insertKeyword($keyword){
+      $query = 'INSERT INTO searches SET
+      username = :username,
+      keyword = :keyword
+      ';
+
+      $username = $_SESSION['username'];
+
+      $stmt = $this->conn->prepare($query);
+
+      $username = htmlspecialchars(strip_tags($username));
+      $keyword = htmlspecialchars(strip_tags($keyword));
+
+      $stmt->bindParam(":username", $username);
+      $stmt->bindParam(":keyword", $keyword);
+
+      if($username!='' && !strstr($keyword, "vimeo.com")){
+        if($stmt->execute()){
+          return false;
+        }
+      }
+
+      return true;
+
+    }
+
+    public function rssFeed($array){
+      $URL = "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+      $rss_string = "<?xml version='1.0'  encoding='UTF-8' ?>\n";
+      $rss_string .= "<rss version='2.0'>\n";
+      
+      $rss_string .= "<channel>\n";
+      $rss_string .= "<title>Sivir</title>\n";
+      $rss_string .= "<description>Similar Video Retriever</description>\n";
+      $rss_string .= "<language>en-US</language>\n";
+      $rss_string .= "<link>$URL</link>\n";
+
+      foreach($array[0] as $key=>$item){
+        $rss_string .= "<item>\n";
+        $rss_string .= "<title>".$item["title"]."</title>\n";
+        $rss_string .= "<video_source>".$item["video_src"]."</video_source>\n";
+        $rss_string .= "<video_id>".$item["video_id"]."</video_id>\n";
+        $rss_string .= "<source>".$item["type"]."</source>\n";
+        $rss_string .= "<description>".$item["description"]."</description>\n";
+        $rss_string .= "<thumbnail>".$item["thumbnail"]."</thumbnail>\n";
+        $rss_string .= "</item>\n\n";
+      }
+  
+      $rss_string .="</channel>";
+      $rss_string .="</rss>";
+  
+      file_put_contents("../../sivir/export/my_rss.xml",$rss_string);
+
+    }
+
+    public function csvExport($array){
+
+      $csv_string = "";
+      foreach($array[0] as $key=>$item){
+        $csv_string .= $item["title"];
+        $csv_string .= ", ";
+        $csv_string .= $item["video_src"];
+        $csv_string .= ", ";
+        $csv_string .= $item["video_id"];
+        $csv_string .= ", ";
+        $csv_string .= $item["type"];
+        $csv_string .= ", ";
+        $csv_string .= $item["description"];
+        $csv_string .= ", ";
+        $csv_string .= $item["thumbnail"];
+        $csv_string .= "\n\n\n";
+      }
+
+      file_put_contents("../../sivir/export/my_csv.csv",$csv_string);
+    }
 
 }
 

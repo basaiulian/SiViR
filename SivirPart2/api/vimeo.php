@@ -17,9 +17,21 @@ switch ($_GET['action']) {
         if(!isset($_GET['keyword']))
         die();
 
-        $keyword = htmlspecialchars($_GET['keyword']);
+        if(!isset($_GET['duration'])){
+			$duration='short';
+		} else {
+			$duration = htmlspecialchars(strip_tags($_GET['duration']));
+        }
+        
+        if(!isset($_GET['order'])){
+			$order='relevance';
+		} else {
+			$order = htmlspecialchars(strip_tags($_GET['order']));
+		}
 
-        $output = $vimeo->searchVideo($keyword);
+		$keyword = htmlspecialchars($_GET['keyword']);
+
+        $output = $vimeo->searchVideo($keyword, $duration, $order);
 
         echo json_encode($output);
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once '../vendor/vimeo/vimeo-api/autoload.php';
+require_once 'vendor/vimeo/vimeo-api/autoload.php';
     // Instantiate DB & connect
 require_once '../database.php';
 require_once 'models/video.php';
@@ -44,18 +44,68 @@ class VimeoModel{
 
     }
 
-    public function searchVideo($keyword){
+    public function searchSpecificVideo($videoId){
+        $vimeo = new \Vimeo\Vimeo(CLIENT_ID, CLIENT_SECRET, TOKEN);
+
+        $title = " ";
+
+        $videos = $vimeo->request('/videos/'.$videoId);
+
+        $title = $videos['body']['name'];
+
+        if($title == " "){
+            die();
+        } else {
+            return $title;
+        }
+
+    }
+
+    public function searchVideo($keyword, $duration, $order){
 
         $vimeo = new \Vimeo\Vimeo(CLIENT_ID, CLIENT_SECRET, TOKEN);
 
+        switch($duration){
+            case 'short':
+                $minDuration = '0:0:01';
+                $maxDuration = '0:3:30';
+                break;
+            case 'medium':
+                $minDuration = '0:3:31';
+                $maxDuration = '0:15:00';
+                break;
+            case 'long':
+                $minDuration = '0:15:01';
+                $maxDuration = '10:00:00';
+                break;
+            default:
+                $minDuration = '0:0:01';
+                $maxDuration = '0:3:30';
+                break;
+                
+        }
+
+        switch(strtoupper($order)){
+            case 'DATE':
+                $vimeoOrder = 'date';
+                break;
+            case 'VIEWCOUNT':
+                $vimeoOrder = 'plays';
+                break;
+            case 'RELEVANCE':
+                $vimeoOrder = 'relevant';
+                break;
+            default:
+                $vimeoOrder = 'relevant';
+                break;
+        }
+
         $keyword = str_replace("#","",$keyword);
-        $videos = $vimeo->request('/videos?query=' . $keyword .'&filter=featured');
+        $videos = $vimeo->request('/videos?query=' . $keyword .'&sort='.$vimeoOrder.'&filter=duration&min_duration='.$minDuration.'&max_duration='.$maxDuration);
         $videos = $videos['body'];
         if(is_array($videos) && $videos['total'] >=1 ) {
         $video_count = $videos['total'];
         $response = $videos['data'];
-
-        // $response=htmlspecialchars(json_encode($response));
 
         } else {
             $response = (array) null; //array gol
@@ -68,11 +118,11 @@ class VimeoModel{
             $new_video_uri = str_replace('/videos/', '', $item['uri']);
             $type ='vimeo';
             $video_src=$item['link'];
-            $video_id=$item['uri'];
+            $video_id = $new_video_uri;
             $title=$item['name'];
             $description=$item['description'];
-            $thumbnail='';
-            $author=$item['name'];
+            $thumbnail='http://localhost/sivir/public/img/vimeo.jpg';
+            $author=' ';
 
             $video = new VideoModel($type, $video_src, $video_id, $title, $description, $thumbnail, $author);
 
@@ -84,6 +134,5 @@ class VimeoModel{
         return $res;
 
     }
-
 
 }

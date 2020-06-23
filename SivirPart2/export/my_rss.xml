@@ -1,0 +1,105 @@
+<?xml version='1.0'  encoding='UTF-8' ?>
+<rss version='2.0'>
+<channel>
+<title>Sivir</title>
+<description>Similar Video Retriever</description>
+<language>en-US</language>
+<link>http://localhost/sivir/api/user.php?</link>
+<item>
+<title>Reebok EasyTone (game)</title>
+<video_source>https://vimeo.com/19785139</video_source>
+<video_id>19785139</video_id>
+<source>vimeo</source>
+<description>sound: Balthazar</description>
+<thumbnail>http://localhost/sivir/public/img/vimeo.jpg</thumbnail>
+</item>
+
+<item>
+<title>Audi Lovers - Rockstar HD</title>
+<video_source>https://www.youtube.com/embed/wjixtWYjfi4</video_source>
+<video_id>wjixtWYjfi4</video_id>
+<source>youtube</source>
+<description>if you like the videos be sure to subscribe! Special thanks to Auditography and Vossen!</description>
+<thumbnail>https://i.ytimg.com/vi/wjixtWYjfi4/mqdefault.jpg</thumbnail>
+</item>
+
+<item>
+<title>Small wooden cars - Different ways to mount wheels</title>
+<video_source>https://vimeo.com/431587212</video_source>
+<video_id>431587212</video_id>
+<source>vimeo</source>
+<description>null</description>
+<thumbnail>http://localhost/sivir/public/img/vimeo.jpg</thumbnail>
+</item>
+
+<item>
+<title>OnePlus 8 (Pro): How to enable the Developer Options? for USB Debugging etc.</title>
+<video_source>https://www.youtube.com/embed/tfdxcOevhQA</video_source>
+<video_id>tfdxcOevhQA</video_id>
+<source>youtube</source>
+<description>With this video, I want to show you, how you can activate the developer options at the One Plus 8 and 8 Pro. I will show you also, how you can disable it after.</description>
+<thumbnail>https://i.ytimg.com/vi/tfdxcOevhQA/mqdefault.jpg</thumbnail>
+</item>
+
+<item>
+<title>DJ Snake, J. Balvin, Tyga - Loco Contigo</title>
+<video_source>https://www.youtube.com/embed/zNl00mOSnJI</video_source>
+<video_id>zNl00mOSnJI</video_id>
+<source>youtube</source>
+<description>STREAM </description>
+<thumbnail>https://i.ytimg.com/vi/zNl00mOSnJI/mqdefault.jpg</thumbnail>
+</item>
+
+<item>
+<title>E.V.O.L.U.C.I.O.N
+.
+.
+.
+.
+.
+.
+.
+#evolucion #evolution #dog #slowmotion #friend #bestfriend #bf #sena #labrador #animal #running #video #senatequeremos #digievolucion #digievolution #blackdog</title>
+<video_source>https://www.instagram.com/p/CBv_GHzq3ZD</video_source>
+<video_id>CBv_GHzq3ZD</video_id>
+<source>instagram</source>
+<description>E.V.O.L.U.C.I.O.N
+.
+.
+.
+.
+.
+.
+.
+#evolucion #evolution #dog #slowmotion #friend #bestfriend #bf #sena #labrador #animal #running #video #senatequeremos #digievolucion #digievolution #blackdog</description>
+<thumbnail>https://instagram.fias1-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/105971104_1910100325787339_4794241909068005108_n.jpg?_nc_ht=instagram.fias1-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=yfoMqKhkGY8AX_e_NIR&oh=7320b65f50ebd5d086a06dca27ac311c&oe=5EF396A0</thumbnail>
+</item>
+
+<item>
+<title>#SkiesAndHorizons #photographer #naturephotography #naturelover #tree #rock #forest #woods #birdssounds #tennesseelife #outdoors</title>
+<video_source>https://www.instagram.com/p/CBv_U8YnSVb</video_source>
+<video_id>CBv_U8YnSVb</video_id>
+<source>instagram</source>
+<description>#SkiesAndHorizons #photographer #naturephotography #naturelover #tree #rock #forest #woods #birdssounds #tennesseelife #outdoors</description>
+<thumbnail>https://instagram.fias1-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/c0.90.720.720a/s640x640/104290934_353222632307614_1664151122896532426_n.jpg?_nc_ht=instagram.fias1-1.fna.fbcdn.net&amp;_nc_cat=110&amp;_nc_ohc=dIklUvgZJx4AX_RHolZ&amp;oh=541eadb8b2d111a680e2a8e0b8a50eff&amp;oe=5EF33F61</thumbnail>
+</item>
+
+<item>
+<title>#resina #resin #artedellaresina #creazioni #flower #natura</title>
+<video_source>https://www.instagram.com/p/CBwAeDOIi2u</video_source>
+<video_id>CBwAeDOIi2u</video_id>
+<source>instagram</source>
+<description>#resina #resin #artedellaresina #creazioni #flower #natura</description>
+<thumbnail>https://instagram.fias1-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/104433025_272814480473137_3858221621942126459_n.jpg?_nc_ht=instagram.fias1-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=YDYAzX_OsTkAX-THpDH&oh=1ea7a3ba19302ac5a7928a33064cd824&oe=5EF3AEF3</thumbnail>
+</item>
+
+<item>
+<title></title>
+<video_source>https://www.youtube.com/embed/NT1HGnotQWc</video_source>
+<video_id>NT1HGnotQWc</video_id>
+<source>youtube</source>
+<description>'Tiger King' Joe Exotic 's Barbary lion has become friends with Abby, the tiny wiener puppy dog at G.W. Zoo. The Netflix show ' Tiger King ' is now one of the ...</description>
+<thumbnail>https://i.ytimg.com/vi/NT1HGnotQWc/mqdefault.jpg</thumbnail>
+</item>
+
+</channel></rss>

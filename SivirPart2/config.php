@@ -1,7 +1,12 @@
 <?php
 
 //youtube
-define('YOUTUBE_API_KEY','AIzaSyBr2BuPDgKEE7Ufsg8knoqKZHm4bDcMexk');
+//AIzaSyDJZWgRld1YLXXrk8VF8SNVb0UktFshomA
+//AIzaSyCmnIlJMmyoPjwpxbWd_e7_aG0qP1KYi_c
+//AIzaSyB790fepo9JIV1YmfvZZxs2lHEOeAu6rBE
+//AIzaSyBIif3Xmb1F0FUKwM_s4cbITsSm5b5myxU
+
+define('YOUTUBE_API_KEY','AIzaSyBIif3Xmb1F0FUKwM_s4cbITsSm5b5myxU');
 define('DB_HOST','localhost');
 define('DB_USERNAME','root');
 define('DB_PASSWORD','');
