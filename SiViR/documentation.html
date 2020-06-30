@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+<meta charset="UTF-8">
+<title>SiViR Documentaton</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="Description" content="Basa Iulian-Danut, Balanica Gabriel,
+    project, infoiasi, web">
+</head>
+
+
+<body>
+
+    <h1> SiViR Documentation </h1>
+
+    <div id="toc_container">
+        <ul class="toc_list">
+            <li><a href="#intro">1. Introduction</a></li>
+            <li><a href="#technologies">2. Technologies used </a>
+                <ul>
+                    <li><a href="#html"> 2.1 HTML5 </a></li>
+                    <li><a href="#css"> 2.2 CSS </a></li>
+                    <li><a href="#php"> 2.3 PHP </a></li>
+                    <li><a href="#xml"> 2.4 XML </a></li>
+                    <li><a href="#js"> 2.5 JavaScript </a></li>
+                    <li><a href="#ajax"> 2.6 AJAX </a></li>
+                    <li><a href="#mysql"> 2.7 MySQL </a></li>
+                    <li><a href="#methods"> 2.8 HTTP Methods </a></li>
+                    <li><a href="#rest"> 2.9 REST </a></li>
+                    <li><a href="#api"> 2.10 API </a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#architecture">3. Application architecture </a>
+            </li>
+            <li>
+                <a href="#implementation">4. Implementation </a>
+            </li>
+            <li>
+                <a href="#sources">5. Sources </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <section id="intro">
+        <h2> 1. Introduction </h2>
+        <p> SiViR(Similar Video Retriever) is a Web Application that offers you the possibility of searching videos on multiple platforms such as: YouTube, Vimeo, Instagram.  </p>
+    </section>
+
+
+    <section id="technologies">
+        <h2> 2. Technologies used </h2>
+        <h3> 2.1 HTML5 </h3>
+        <p id="html" > <strong> HTML 5 </strong> is a markup language used for structuring and presenting content on the World Wide Web. It was the fifth and last major version of <strong>HTML</strong> that is a World Wide Web Consortium (W3C) recommendation.
+        </p>
+        <h3> 2.2 CSS </h3>
+        <p id="css"> <strong> CSS </strong> stands for "Cascading Style Sheet." Cascading style sheets are used to format the layout of Web pages. They can be used to define text styles, table sizes, and other aspects of Web pages that previously could only be defined in a page's <strong>HTML</strong>.
+        </p>
+        <h3> 2.3 PHP </h3>
+        <p id="php"> <strong> PHP </strong> (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into <strong>HTML</strong>.
+        </p>
+        <h3> 2.4 XML </h3>
+        <p id="xml"> <strong> XML </strong> stands for "Extensible Markup Language.". <strong> XML </strong> is used to define documents with a standard format that can be read by any XML-compatible application.
+        </p>
+        <h3> 2.5 JavaScript </h3>
+        <p id="js"> <strong> JavaScript(JS) </strong> is a programming language commonly used in web development. It is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.
+        </p>
+        <h3> 2.6 AJAX </h3>
+        <p id="ajax">
+            <strong> AJAX </strong> (Asynchronous JavaScript and XML) allows web pages to be updated asynchronously by exchanging data with a web server behind the scenes. This means that it is possible to update parts of a web page, without reloading the whole page.
+        </p>
+        <h3> 2.7 MySQL </h3>
+        <p id="mysql" > <strong> MySQL </strong> is a freely available open source Relational Database Management System (RDBMS) that uses Structured Query Language (<strong>SQL</strong>).
+            <strong>SQL</strong> is the most popular language for adding, accessing and managing content in a database.
+        </p>
+
+        <h3> 2.8 HTTP Methods </h3>
+        <p id="methods"> There are two ways the browser client can send information to the web server: </p>
+        <p> &emsp;The <strong> GET </strong> method sends the encoded user information appended to the page request.</p>
+        <p> &emsp;The <strong> POST </strong> method transfers information via HTTP headers. </p>
+
+        <h3> 2.9 REST </h3>
+        <p id="rest" > <strong>Representational state transfer (REST)</strong> is a software architectural style that defines a set of constraints to be used for creating Web services. Web services that conform to the <strong>REST</strong> architectural style, called RESTful Web services, provide interoperability between computer systems on the Internet.
+        </p>
+
+        <h3> 2.10 API </h3>
+        <p id="rest" > <strong>Application programming interface (API)</strong> is a set of rules that allows one piece of software application to talk to another. Those "rules" can include the create, read, update and delete operations (<strong>CRUD</strong>). The API is created from models (database tables), endpoints and the connection to the database. Each model is represented by
+            a class which contains attributes and methods. At a request to an endpoint in the API, certain attributes will be set and certain methods will be called. 
+            In our application calls are made to <a href="https://developers.google.com/youtube/v3/docs/search/list">YouTube API</a>, <a href="https://github.com/postaddictme/instagram-php-scraper">Instagram API</a> and <a href="https://developer.vimeo.com/api/reference/videos#search_videos">Vimeo API</a>, and the answers obtained will be taken and processed in JSON format. 
+            The information extracted from the answers is sent to the interface so that it can be viewed, modified or deleted by the user.
+        </p>
+        
+    </section>
+
+    <section id="architecture">
+            <h2> 3. Application architecture </h2>
+            <p> 
+                The <strong>Model-View-Controller (MVC)</strong> is an architectural pattern that separates an application into three main logical components: the model, the view, and the controller. Each of these components are built to handle specific development aspects of an application.
+            </p>
+            <h3> 3.1 Model </h3>
+            <p>
+                The central component of the pattern. It is the application's dynamic data structure, independent of the user interface. It directly manages the <strong>data, logic and rules</strong> of the application.
+            </p>
+            <h3> 3.2 View </h3>
+            <p>
+                Any <strong>representation</strong> of information such as a chart, diagram or table. Multiple views of the same information are possible, such as a bar chart for management and a tabular view for accountants.
+            </p>
+            <h3> 3.3 Controller </h3>
+            <p>
+                The <strong>controller</strong> is that part of the application that handles the user interaction. The <strong>controller</strong> interprets the mouse and keyboard inputs from the user, informing model and the view to change as appropriate.
+            </p>
+    </section>
+
+    <section id="implementation">
+            
+           <p>
+            <strong> API folder </strong> containts endpoints and models.
+        </p>
+        <ul>
+        <p>
+            <strong> instagram.php </strong> - An object of type InstagramModel is created and the function corresponding to the search is called.
+        </p>
+         <p>
+            <strong> user.php </strong> - Endpoints for each function in the UserModel.
+        </p>
+         <p>
+            <strong> video.php </strong> - Create an object of each type (Instagram / Vimeo / Youtube) and call the search function of each.
+        </p>
+         <p>
+            <strong> vimeo.php </strong> - An object of type VimeoModel is created and the function corresponding to the search is called.
+        </p>
+        <p>
+            <strong> youtube.php </strong> - An object of type YoutubeModel is created and the function corresponding to the search is called.
+        </p>
+        </ul>
+
+        <ul>
+         <p>
+            <strong> MODELS folder </strong>
+        </p>
+        <ul>
+        <p>
+         <strong> instagram.php </strong> - contains the InstagramModel class where the call to the Instagram API is made.
+        </p>
+           <p>
+            <strong> user.php </strong> - Contains user information and functions for Login, Register, Delete, checkingUser, checkAdmin, inserting user preferences and retrieving the necessary information.
+        </p>
+
+        <p>
+            <strong> video.php </strong> - Retrieve information from the user and call the appropriate requests according to the user's preferences.The response from the API is saved in an array so that it can be processed.
+        </p>
+
+        <p>
+            <strong> vimeo.php </strong> - Contains the VimeoModel class where the call to the VIMEO API is made.
+        </p>
+       <p>
+            <strong> youtube.php </strong>  - Contains the YoutubeModel class where the call to the Youtube API is made.
+        </p>
+        </ul>
+    </ul>
+         <p>
+            <strong>  CONTROLLERS folder </strong>
+        </p>
+        <ul>
+
+        <p>
+            <strong> vendor </strong> - Vimeo and Instagram library
+        </p>
+       
+         <p>
+            <strong>  control_panel.php </strong> - Contains the call to the API to get all registered users.
+        </p>
+
+         <p>
+            <strong>  favourites.php </strong> - Includes the corresponding file in the view to make the connection between the interface and the functionality.
+        </p>
+         <p>
+            <strong>  home.php </strong> - Includes the corresponding file in the view to make the connection between the interface and the functionality.
+        </p>
+         <p>
+            <strong>  login.php </strong> UserController handles requests to API and validates the user.
+        </p>
+         <p>
+            <strong>  logout.php </strong>  Ends the user login session.
+        </p>
+         <p>
+            <strong>  register.php </strong> RegisterController handles requests to Api and creates the user if it is possible.
+        </p>
+
+        </ul>
+         <p>
+            <strong>  PUBLIC Folder </strong> 
+        </p>
+
+    <ul>
+         <p>
+            <strong>  css folder </strong> 
+        </p>
+
+         <ul>
+             <p>
+             The <strong>  control_panel_style.css </strong>  has the role of formatting HTML from control_panel.php document.
+              </p>
+               <p> The <strong> index_style.css </strong> has the role of formatting HTML from the following PHP documents: top.php, home.php, bottom.php. 
+        </p>
+                <p>
+               The <strong>  login_style.css </strong> has the role of formatting HTML from login.php document.
+
+               </p>
+                <p>
+               The <strong>  register_style.css </strong> has the role of formatting HTML from register.php document.
+
+               </p>
+         </ul>
+
+
+         <p>
+            <strong> js folder  </strong> 
+        </p>
+        <ul>
+             <p>
+             The <strong>  home.js </strong>  Displays search information and provides video functionality.
+              </p>
+               <p>
+                The <strong>  favourite.js </strong>  Displays information about the user's latest accesses and provides video functionality.
+               </p>
+                <p>
+               The <strong>  control_panel.js </strong>  It deals with the administration module from the control panel, respectively promote user and delete user.
+
+               </p>
+         </ul>
+
+     </ul>
+
+
+             The <strong>  Views FOLDER </strong>  
+        </p>
+        <ul>
+        <p>
+            The <strong>  404.php </strong> 
+                  If the page is not found.
+        </p>
+                 <p>
+            <strong>  control_panel.php </strong> The HTML code that prepares the control_panel page.
+        </p>
+
+         <p>
+             <strong>  favourites.php </strong>  The HTML code that prepares the favourites page.
+        </p>
+         <p>
+            <strong>  home.php </strong>  The HTML code that prepares the home page.
+        </p>
+         <p>
+             <strong>  login.php </strong>   The HTML code that prepares the login page.
+        </p>
+         <p>
+             <strong>  top.php</strong>  Each top is set according to the type of user who uses the site.
+        </p>
+         <p>
+             <strong>  register.php </strong>  The HTML code that prepares the register page.
+        </p>
+
+    </ul>
+
+        <p>
+            The <strong>  database.php</strong>  The connection to the database is made.
+        </p>
+         <p>
+            The <strong>  functions.php </strong>  Contains request functions and user setting in the login session.
+        </p>
+
+         <p>
+            The <strong>  index.php </strong> Depending on each page, the user interface is prepared.
+        </p>
+
+    </section>
+
+    <section id="sources">
+        <h2> 5. Sources</h2>
+        <p>
+            <a href="https://www.w3schools.com/howto/howto_css_searchbar.asp">https://www.w3schools.com/howto/howto_css_searchbar.asp</a>
+        </p>
+        <p>
+            <a href="https://github.com/postaddictme/instagram-php-scraper">https://github.com/postaddictme/instagram-php-scraper</a>
+        </p>
+        <p>
+            <a href="https://developers.google.com/youtube/v3/docs/search/list">https://developers.google.com/youtube/v3/docs/search/list</a>
+        </p>
+        <p>
+            <a href="https://developer.vimeo.com/api/reference/videos#search_videos">https://developer.vimeo.com/api/reference/videos#search_videos</a>
+        </p>
+        <p>
+            <a href="https://www.w3schools.com/php/php_ajax_poll.asp">https://www.w3schools.com/php/php_ajax_poll.asp</a>
+        </p>
+        <p>
+            <a> PHP REST API From Scratch </a> <a href="https://www.youtube.com/watch?v=OEWXbpUMODk"> [Part1]    </a> <a href="https://www.youtube.com/watch?v=-nq4UbD0NT8">    [Part2] </a>  <a href="https://www.youtube.com/watch?v=tG2U18EmIu4">    [Part3] </a> 
+        </p>
+    </section>
+
+    <section>
+        <h2> Authors </h2>
+        <p> Basa Iulian-Danut </p>
+        <p> Balanica Gabriel </p>
+    </section>
+
+</body>
+
+</html>
